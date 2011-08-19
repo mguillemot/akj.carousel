@@ -184,7 +184,10 @@
 
           var currentImage = $('.image-right', carousel).attr('src');
           $('.image-left', carousel).attr('src', currentImage);
-          $('.image-container', carousel).css('left', '0px');
+          setTimeout(function()
+          {
+            $('.image-container', carousel).css('left', '0px');
+          }, 0); // to prevent jitter on Firefox when images are swapped
 
           animating = false;
         });
