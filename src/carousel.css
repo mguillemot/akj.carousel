@@ -1,19 +1,15 @@
+/* SEE END OF FILE FOR EDITING THESE VALUES */
+
 .carousel {
   padding: 0;
   margin: 0;
   position: relative;
-  width: 1014px;
-  height: 368px;
   overflow: hidden;
   line-height: 0;
 }
 
 .carousel .content {
   position: absolute;
-  left: 8px;
-  top: 7px;
-  width: 997px;
-  height: 354px;
   overflow: hidden;
 }
 
@@ -60,17 +56,12 @@
 
 .carousel .opaque-layer {
   position: absolute;
-  width: 997px;
-  height: 354px;
-  background: url("bk_bg8.png") no-repeat;
   opacity: 0.5;
   filter: alpha(opacity = 50);
 }
 
 .carousel .image-container {
   position: absolute;
-  width: 997px;
-  height: 354px;
 }
 
 .carousel .image-left {
@@ -82,28 +73,24 @@
 .carousel .image-right {
   position: absolute;
   top: 0;
-  left: 997px;
 }
 
 .carousel ul {
   position: absolute;
-  top: -10px;
-  left: 560px;
-  width: 400px;
-  height: 345px;
   z-index: 10;
   overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .carousel ul li {
   position: relative;
-  left: 200px;
   list-style: none;
 }
 
-.carousel ul img {
+.carousel ul img.thumb {
   position: relative;
-  margin-bottom: 6px;
   border: 2px solid #999999;
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -117,7 +104,19 @@
 
 .carousel .frame {
   position: absolute;
-  width: 1014px;
-  height: 368px;
-  background: url("outline24.png") no-repeat;
 }
+
+/* PUT YOUR EDITED VALUES HERE */
+
+/*
+This is an example of custom value override:
+
+.carousel .text .container h2 {
+  top: 7px;
+  font-size: 14pt;
+}
+
+.carousel ul img.thumb {
+  border: 2px solid pink;
+}
+*/

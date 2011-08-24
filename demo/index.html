@@ -7,10 +7,10 @@
   <script src="js/jquery-1.6.2.js" type="text/javascript"></script>
   <script src="js/jquery.timers-1.2.js" type="text/javascript"></script>
   <script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-  <script src="../src/akj.carousel-1.0.js" type="text/javascript"></script>
+  <script src="../src/akj.carousel-1.1.js" type="text/javascript"></script>
 </head>
 <body>
-<h1>AKJ Carousel Demo</h1>
+<h1>AKJ Carousel 1.1 Demo</h1>
 
 <div>
   <h3>Dependancies</h3>
@@ -28,6 +28,8 @@
   $(function()
   {
     $('#carousel').carousel({
+      outlineImage: '../src/outline_default.png',
+      transparentImage: '../src/transp_default.png',
       pages: [
         {
           bigImg: "banners/dofus_big.jpg",
@@ -65,6 +67,51 @@
   });
 </script>
 
+<hr/>
+
+<div id="carousel2"></div>
+
+<script type="text/javascript">
+  $(function()
+  {
+    $('#carousel2').carousel({
+      outerSize: [880, 350],
+      innerSize: [880, 350],
+      thumbsSize: [150, 98],
+      thumbsOffset: -10,
+      outlineImage: 'img/outline_880_350.png',
+      transparentImage: 'img/transp_880_350.png',
+      pages: [
+        {
+          bigImg: "banners/sephykarousel_001.jpg",
+          smallImg: "banners/sephykarousel_001_mini.png",
+          bigText: "Romitest1",
+          smallText: "trallalalililill",
+          url: ""
+        }, {
+          bigImg: "banners/sephykarousel_002.jpg",
+          smallImg: "banners/sephykarousel_002_mini.png",
+          bigText: "Romitest2",
+          smallText: "trallalalilisbsns,s,s,slill",
+          url: ""
+        }, {
+          bigImg: "banners/sephykarousel_003.jpg",
+          smallImg: "banners/sephykarousel_003_mini.png",
+          bigText: "Romitest3",
+          smallText: "trallalaliliqbvqbqbqbqbqblill",
+          url: ""
+        }, {
+          bigImg: "banners/sephykarousel_004.jpg",
+          smallImg: "banners/sephykarousel_004_mini.png",
+          bigText: "Romitest4",
+          smallText: "traqbqbqbqblalililill",
+          url: ""
+        }
+      ]
+    });
+  });
+</script>
+
 <div>
   (See page source for this example code.)
 </div>
@@ -73,7 +120,7 @@
   <h3>Notes</h3>
 
   <ul>
-    <li>Sizes are fixed: 1014x368 for the whole carousel, 997x354 for big images, 182x105 for thumbnails.</li>
+    <li>Default sizes are: 1014x368 for the whole carousel, 997x354 for big images, 182x105 for thumbnails. Default outlines &amp; transparency frames for these sizes are provided with the plugin.</li>
     <li>No elegant fallback in case JavaScript is diabled: the carousel will just not be displayed at all.</li>
     <li>Confirmed working on: Firefox 3.6+, Google Chrome, Internet Explorer 8+ (no round corners for thumbnails on IE8)</li>
   </ul>
@@ -82,7 +129,7 @@
 <div>
   <h3>Additional copyright</h3>
 
-  The images, characters and names used in this demo page are all Copyright (c) 2011 - Ankama Japan.
+  The images, characters and names used in this demo page are all Copyright (c) 2011 Ankama, (c) 2011 Ankama Japan or (c) 2011 Romain Pergod. Do not reproduce without the authors authorization.
 </div>
 
 </body>

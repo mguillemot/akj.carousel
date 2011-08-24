@@ -1,5 +1,6 @@
 /**
  * @title "AKJ Carousel"
+ * @version "1.1 - 2011/8/24"
  * @version "1.0 - 2011/8/16"
  * @version "0.1 - 2010/3/25"
  *
@@ -36,6 +37,14 @@
       autoTime: 4000,
       randomize: true,
       easing: null,
+      outerSize: [1014, 368],
+      innerSize: [997, 354],
+      thumbsSize: [182, 105],
+      thumbsBorder: 2, // TODO implement effect in generated CSS
+      thumbsOffset: -6,
+      thumbsSpacing: 6,
+      transparentImage: "transp_default.png",
+      outlineImage: "outline_default.png",
       pages: []
     };
 
@@ -95,7 +104,41 @@
               .addClass('carousel')
               .append('<div class="content"><div class="image-container"/><div class="opaque-layer">&nbsp;</div></div>')
               .append('<div class="frame">&nbsp;</div>')
-              .append('<div class="content"><div class="text"><div class="container"><a><h2/><h3/></a></div></div><ul/></div>');
+              .append('<div class="content"><div class="text"><div class="container"><a><h2/><h3/></a></div></div><ul/></div>')
+              .css({
+                width: params.outerSize[0] + 'px',
+                height: params.outerSize[1] + 'px'
+              });
+      var autoMargin = (params.innerSize[1] - 3 * params.thumbsSize[1] - 6 * params.thumbsBorder - 2 * params.thumbsSpacing) / 2;
+      $('.frame', carousel).css({
+        background: 'url("' + params.outlineImage + '") no-repeat',
+        width: params.outerSize[0] + 'px',
+        height: params.outerSize[1] + 'px'
+      });
+      $('.content', carousel).css({
+        width: params.innerSize[0] + 'px',
+        height: params.innerSize[1] + 'px',
+        left: ((params.outerSize[0] - params.innerSize[0]) / 2) + 'px',
+        top: ((params.outerSize[1] - params.innerSize[1]) / 2) + 'px'
+      });
+      $('.image-container', carousel).css({
+        width: params.innerSize[0] + 'px',
+        height: params.innerSize[1] + 'px'
+      });
+      $('.opaque-layer', carousel).css({
+        background: 'url("' + params.transparentImage + '") no-repeat',
+        width: params.innerSize[0] + 'px',
+        height: params.innerSize[1] + 'px'
+      });
+      $('ul', carousel).css({
+        top: autoMargin + 'px',
+        left: (params.innerSize[0] - params.thumbsSize[0] * 2 - autoMargin + params.thumbsOffset) + 'px',
+        width: (params.thumbsSize[0] * 2 + params.thumbsBorder * 4) + 'px',
+        height: (3 * params.thumbsSize[1] + 2 * params.thumbsSpacing + 6 * params.thumbsBorder) + 'px'
+      });
+      $('.text .container', carousel).css({
+
+      });
       $('a', carousel).attr('href', lastPage.url);
       $('h2', carousel).text(lastPage.bigText);
       $('h3', carousel).text(lastPage.smallText);
@@ -105,13 +148,43 @@
       for (i = 0; i < pages.length; i++)
       {
         page = pages[i];
-        $('ul', carousel).append('<li><a href="' + page.url + '"><img src="' + page.smallImg + '" alt="' + page.bigText + '" width="182" height="105"></a></li>');
+        $('ul', carousel).append($('<li/>').append(
+                $('<a/>').attr('href', page.url).append(
+                        $('<img class="thumb"/>').attr({
+                          src: page.smallImg,
+                          alt: page.bigText,
+                          width: params.thumbsSize[0],
+                          height: params.thumbsSize[1]
+                        })
+                        )
+                ));
       }
+      $('li', carousel).css({
+        left: params.thumbsSize[0] + 'px',
+        marginBottom: params.thumbsSpacing + 'px'
+      });
 
       // Load 2 first images into the carousel
       $('.image-container', carousel)
-              .append('<img class="image-left" src="' + lastPage.bigImg + '" alt="' + lastPage.bigText + '" width="997" height="354">')
-              .append('<img class="image-right" src="' + pages[0].bigImg + '" alt="' + pages[0].bigText + '" width="997" height="354">');
+              .append(
+              $('<img/>').attr({
+                'class': 'image-left',
+                src: lastPage.bigImg,
+                alt: lastPage.bigText,
+                width: params.innerSize[0],
+                height: params.innerSize[1]
+              }))
+              .append(
+              $('<img/>').attr({
+                'class': 'image-right',
+                src: pages[0].bigImg,
+                alt: pages[0].bigText,
+                width: params.innerSize[0],
+                height: params.innerSize[1]
+              }));
+      $('.image-right', carousel).css({
+        left: params.innerSize[0] + 'px'
+      });
 
       // Preload other images (3rd++)
       for (i = 2; i < pages.length; i++)
@@ -149,12 +222,12 @@
         $('.image-right', carousel).attr('src', clickedPage.bigImg);
 
         $(clickedPage.img).animate({
-          left: '-=182px',
+          left: '-=' + params.thumbsSize[0],
           opacity: '0'
         }, 750, params.easing);
 
         $(followers).animate({
-          top: '-=115px'
+          top: '-=' + (params.thumbsSize[1] + 2 * params.thumbsBorder + params.thumbsSpacing) + 'px'
         }, 750, params.easing);
 
         $('.text', carousel).fadeOut(375, function()
@@ -165,7 +238,7 @@
         }).fadeIn(375);
 
         $('.image-container', carousel).animate({
-          left: '-=997px'
+          left: '-=' + params.innerSize[0]
         }, 750, params.easing, function()
         {
           for (var i = 0; i < pages.length; i++)
